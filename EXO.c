@@ -7,6 +7,7 @@
 #include "FONCTION.h"
 
 void menuPrinc(){
+    srand(time(NULL));
     int choix = 0;
     int nbJoueurs = 0;
     Joueurs** tablNom = NULL;
@@ -58,9 +59,9 @@ void monop(){
     switch(choix){
         case 1:
             a =  jeuDes(&desUn, &desDeux);
-            printf("Le total est de %d", a);
-            b = dooble(&desUn, &desDeux);
-            printf("%d", b);
+            printf("Le total est de %d.", a);
+            dooble(&desUn, &desDeux);
+
 
             break;
         case 2:
