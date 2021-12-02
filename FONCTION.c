@@ -101,6 +101,7 @@ Joueurs* creer(char* nom, int argent, int nbProprietes, int nbGroupes , int nbMa
 }
 
 
+
 void tablJoueurs(Joueurs*** tabNom, int* taille, int* nbJoueurs, char* nom, int argent, int nbProprietes, int nbGroupes , int nbMaisons, int nbHotels, int cartesPrison, int faillite, int hypotheque) {
     while (*taille < *nbJoueurs) {
         if (*taille == 0) {
@@ -126,8 +127,8 @@ void afficherTous(Joueurs** tablNom, int taille) {
     }
 }
 
-void achatRue(char* nom, int* dispo, int loyer, int hypotheque, int argent){
-    Rue* p;
+void achatRue(char nom, int* dispo, int loyer, int hypotheque, int* argent, int numero){
+    Propriete* p;
     Joueurs* pAcheteur;
     Joueurs* pProprio;
     if (p.dispo == 0){
@@ -135,20 +136,51 @@ void achatRue(char* nom, int* dispo, int loyer, int hypotheque, int argent){
             printf("La rue %s n'est pas disponible à l'achat.", p.nom);
         }
         else {
-            printf("La rue %s n'est pas disponible à l'achat, merci de bien vouloir payé %d", p.nom, p.loyer);
+            printf("La rue %s n'est pas disponible à l'achat, merci de bien vouloir payé %d euros.", p.nom, p.loyer);
             pAcheteur.argent = pAcheteur.argent - p.loyer;
             pProprio.argent = pProprio->argent + p.loyer;
         }
 
     }
     else {
-        printf("La rue %s est disponible à l'achat, pour l'acheter taper 1 sinon taper 0:\n>", p.nom);
+        printf("La rue %s est disponible à l'achat, pour l'acheter taper 0 sinon taper 1:\n>", p.nom);
         scanf("%d", &p.dispo);
-        pAcheteur.argent = pAcheteur.argent
+        pAcheteur.argent = pAcheteur.argent - p.prix;
+
 
     }
+}
 
+Propriete* initProp(int numero, int loyer, char* nom, int prix, int type, int donne){
+    Propriete* p;
+    strcpy(p->nom, nom);
+    p->dispo = 1;
+    p->hypotheque = 0;
+    p.type = type;
+    p->numero = numero;
+    p->loyer = loyer;
+    p->prix = prix;
+    return p;
 
+}
 
+int  placement(int* placement){
+    Joueurs* p;
+        srand(time(NULL));
+        int choix = 0;
+        int desUn = 0, desDeux = 0;
+        printf("veuillez choisir parmis les options suivantes:\n 1) Lancez votre des.\n 2) quittez la partie.\n>");
+        scanf("%d", &choix);
+        switch(choix){
+            case 1:
+                p.placement = p->placement + jeuDes(&desUn, &desDeux);
+                metrre qqchose
+                p.placement = p->placement + dooble(&desUn, &desDeux);
+                return (p->placement)
+                break;
+            case 2:
+                printf("Vous avez quitter la partie.");
+        }
+    }
 
 }

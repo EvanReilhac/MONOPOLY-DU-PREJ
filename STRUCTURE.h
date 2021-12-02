@@ -6,6 +6,7 @@
 #define MONOPOLY_STRUCTURE_H
 typedef struct{
     char nom[NOMBRE_MAX];
+    int placement;
     int argent;
     int nbMaisons;
     int nbHotels;
@@ -16,4 +17,16 @@ typedef struct{
     int hypotheque;
 
 }Joueurs;
+
+typedef struct{
+    char nom[NOMBRE_MAX];
+    int type;
+    int donne;
+    int prix;
+    int loyer;
+    int dispo;
+    int hypotheque;
+    int numero;
+
+}Propriete;
 #endif //MONOPOLY_STRUCTURE_H
