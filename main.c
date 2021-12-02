@@ -2,7 +2,7 @@
 #include "EXO.h"
 
 int main() {
-    menuPrinc();
-    //monop();
+    //menuPrinc();
+    monop();
     return 0;
 }

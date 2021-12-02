@@ -18,21 +18,24 @@ int getRandomInteger() {
     return nombrealeatoire;
 }
 
-void jeuDes(int* desUn, int* desDeux) {
+int jeuDes(int* desUn, int* desDeux) {
     *desUn = getRandomInteger();
     *desDeux = getRandomInteger();
-    printf("%d  %d", *desUn, *desDeux);
+    printf("%d  %d\n", *desUn, *desDeux);
+    return (*desUn + *desDeux);
+
 }
 
-void dooble(int* desUn, int* desDeux){
+int dooble(int* desUn, int* desDeux){
     int choixDouble = 0;
     if (*desUn == *desDeux){
         for (int i = 1; i < NOMBRE_DOUBLE; i++){
-            printf(" DOUBLE!!! Vous pouvez relancer.\n");
+            printf(" \nDOUBLE!!! Vous pouvez relancer.\n");
             printf("Appuyer sur 1 pour relancer, 0 si vous shouaiter quitter la partie:\n>");
             scanf("%d", &choixDouble);
             if (choixDouble == 1){
                 jeuDes(desUn, desDeux);
+                return (*desUn + *desDeux);
             }
             else{
                 printf("vous quittez la partie.");
@@ -43,6 +46,7 @@ void dooble(int* desUn, int* desDeux){
     }
     else{
         printf(" Joueur suivant");
+        return 0;
     }
 }
 
@@ -86,9 +90,10 @@ return p;
 }*/
 
 
-Joueurs* creer(char* nom, int argent, int nbProprietes, int nbGroupes , int nbMaisons, int nbHotels, int cartesPrison, int faillite, int hypotheque) {
+Joueurs* creer(char* nom, int placement, int argent, int nbProprietes, int nbGroupes , int nbMaisons, int nbHotels, int cartesPrison, int faillite, int hypotheque) {
     Joueurs* p = (Joueurs*) malloc(sizeof(Joueurs));
     strcpy(p->nom, nom);
+    p->placement = placement;
     p->argent = argent;
     p->nbProprietes = nbProprietes;
     p->nbGroupes = nbGroupes;
@@ -102,7 +107,7 @@ Joueurs* creer(char* nom, int argent, int nbProprietes, int nbGroupes , int nbMa
 
 
 
-void tablJoueurs(Joueurs*** tabNom, int* taille, int* nbJoueurs, char* nom, int argent, int nbProprietes, int nbGroupes , int nbMaisons, int nbHotels, int cartesPrison, int faillite, int hypotheque) {
+void tablJoueurs(Joueurs*** tabNom, int* taille, int* nbJoueurs, char* nom, int placement, int argent, int nbProprietes, int nbGroupes , int nbMaisons, int nbHotels, int cartesPrison, int faillite, int hypotheque) {
     while (*taille < *nbJoueurs) {
         if (*taille == 0) {
             *tabNom = malloc(sizeof(Joueurs*));
@@ -110,14 +115,14 @@ void tablJoueurs(Joueurs*** tabNom, int* taille, int* nbJoueurs, char* nom, int 
         else {
             *tabNom = (Joueurs**) realloc(*tabNom, ((*taille) + 1) * sizeof(Joueurs*));
         }
-        (*tabNom)[*taille] = creer(nom, argent, nbProprietes, nbGroupes, nbMaisons, nbHotels, cartesPrison, faillite,
+        (*tabNom)[*taille] = creer(nom, placement, argent, nbProprietes, nbGroupes, nbMaisons, nbHotels, cartesPrison, faillite,
                                    hypotheque);
         (*taille)++;
     }
 }
 
 void afficher(Joueurs* c) {
-    printf("\"%s\", %d euros, %d proprietes, %d groupes, %d maisons, %d hotels, %d cartes prison, %d faillite, %d hypotheques.\n", c->nom, c->argent, c->nbProprietes, c->nbGroupes, c->nbMaisons, c->nbHotels, c->cartesPrison, c->faillite, c->hypotheque);
+    printf("\"%s\", case numero %d, %d euros, %d proprietes, %d groupes, %d maisons, %d hotels, %d cartes prison, %d faillite, %d hypotheques.\n", c->nom, c->argent, c->nbProprietes, c->nbGroupes, c->nbMaisons, c->nbHotels, c->cartesPrison, c->faillite, c->hypotheque);
 }
 
 void afficherTous(Joueurs** tablNom, int taille) {
@@ -131,21 +136,21 @@ void achatRue(char nom, int* dispo, int loyer, int hypotheque, int* argent, int 
     Propriete* p;
     Joueurs* pAcheteur;
     Joueurs* pProprio;
-    if (p.dispo == 0){
-        if (p.hypotheque == 0){
-            printf("La rue %s n'est pas disponible à l'achat.", p.nom);
+    if (p->dispo == 0){
+        if (p->hypotheque == 0){
+            printf("La rue %s n'est pas disponible à l'achat.", p->nom);
         }
         else {
-            printf("La rue %s n'est pas disponible à l'achat, merci de bien vouloir payé %d euros.", p.nom, p.loyer);
-            pAcheteur.argent = pAcheteur.argent - p.loyer;
-            pProprio.argent = pProprio->argent + p.loyer;
+            printf("La rue %s n'est pas disponible à l'achat, merci de bien vouloir payé %d euros.", p->nom, p->loyer);
+            pAcheteur->argent = pAcheteur->argent - p->loyer;
+            pProprio->argent = pProprio->argent + p->loyer;
         }
 
     }
     else {
-        printf("La rue %s est disponible à l'achat, pour l'acheter taper 0 sinon taper 1:\n>", p.nom);
-        scanf("%d", &p.dispo);
-        pAcheteur.argent = pAcheteur.argent - p.prix;
+        printf("La rue %s est disponible à l'achat, pour l'acheter taper 0 sinon taper 1:\n>", p->nom);
+        scanf("%d", &p->dispo);
+        pAcheteur->argent = pAcheteur->argent - p->prix;
 
 
     }
@@ -156,7 +161,7 @@ Propriete* initProp(int numero, int loyer, char* nom, int prix, int type, int do
     strcpy(p->nom, nom);
     p->dispo = 1;
     p->hypotheque = 0;
-    p.type = type;
+    p->type = type;
     p->numero = numero;
     p->loyer = loyer;
     p->prix = prix;
@@ -173,14 +178,12 @@ int  placement(int* placement){
         scanf("%d", &choix);
         switch(choix){
             case 1:
-                p.placement = p->placement + jeuDes(&desUn, &desDeux);
-                metrre qqchose
-                p.placement = p->placement + dooble(&desUn, &desDeux);
-                return (p->placement)
+                p->placement = p->placement + jeuDes(&desUn, &desDeux);
+                p->placement = p->placement + dooble(&desUn, &desDeux);
+                return (p->placement);
                 break;
             case 2:
                 printf("Vous avez quitter la partie.");
         }
     }
 
-}

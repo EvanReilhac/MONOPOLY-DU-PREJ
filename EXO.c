@@ -21,7 +21,7 @@ void menuPrinc(){
             for (int i = 0; i < nbJoueurs; i++){
                 printf("Rentrez le nom du joueur %d:\n>", i+1);
                 scanf("%s", nom);
-                tablJoueurs(&tablNom, &taille, &nbJoueurs,  nom, 1500, 0, 0, 0, 0, 0, 0, 0);
+                tablJoueurs(&tablNom, &taille, &nbJoueurs,  nom, 1500,0, 0, 0, 0, 0, 0, 0, 0);
 
             }
             afficherTous(tablNom, taille);
@@ -51,13 +51,16 @@ void menuPrinc(){
 void monop(){
     srand(time(NULL));
     int choix = 0;
+    int a = 0, b = 0;
     int desUn = 0, desDeux = 0;
     printf("veuillez choisir parmis les options suivantes:\n 1) Lancez votre des.\n 2) quittez la partie.\n>");
     scanf("%d", &choix);
     switch(choix){
         case 1:
-            jeuDes(&desUn, &desDeux);
-            dooble(&desUn, &desDeux);
+            a =  jeuDes(&desUn, &desDeux);
+            printf("Le total est de %d", a);
+            b = dooble(&desUn, &desDeux);
+            printf("%d", b);
 
             break;
         case 2:
