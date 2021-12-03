@@ -1,8 +1,11 @@
 #include <stdio.h>
-#include "EXO.h"
-
+#include "propriete.h"
+#include "joueur.h"
 int main() {
-    menuPrinc();
-    //monop();
+    initCases();
+    int nb = nombreJoueur();
+    initJoueur(nb);
+
+
     return 0;
 }

@@ -7,36 +7,37 @@
 #include "fonctions.h"
 #include "structure.h"
 #include "MACRO.h"
-Case* initProp(int numero, int loyer, char* nom, int prix, int type, int donne, int nbMaison)
+
+Case initProp(int numero, int loyer, char* nom, int prix, int type, int donne, int nbMaison)
 {
-    Case* p;
-    strcpy(p->nomPro, nom);
-    p->dispo = 1;
-    p->valeurHypotheque = 0;
-    p->type = type;
-    p->numero = numero;
-    p->loyer = loyer;
-    p->prix = prix;
-    p->nbMaison = nbMaison;
+    Case p;
+    strcpy(p.nomPro, nom);
+    p.dispo = 1;
+    p.valeurHypotheque = 0;
+    p.type = type;
+    p.numero = numero;
+    p.loyer = loyer;
+    p.prix = prix;
+    p.nbMaison = nbMaison;
     return p;
 }
 
-Case* initChgt(int numero, char* nom, int type, int newCase, int donne)
+Case initChgt(int numero, char* nom, int type, int newCase, int donne)
 {
-    Case* p;
-    strcpy(p->nomPro, nom);
-    p->dispo = 1;
-    p->valeurHypotheque = 0;
-    p->type = type;
-    p->numero = numero;
-    p->newCase = newCase;
-    p->donne = donne;
+    Case p;
+    strcpy(p.nomPro, nom);
+    p.dispo = 1;
+    p.valeurHypotheque = 0;
+    p.type = type;
+    p.numero = numero;
+    p.newCase = newCase;
+    p.donne = donne;
     return p;
 }
 //foot basket rugby boxe natation equitation tennis golf
 void initCases()
 {
-    Case** tabCase = (Case**) malloc(NOMBRE_CASE * sizeof(Case));
+    Case* tabCase =  calloc(NOMBRE_CASE , sizeof(Case)); // initialisation des cases
     tabCase[0] = initProp(1, 0, "Depart", 0, 3, 200, 0 );
     tabCase[1] = initProp(2, 60, "Maradona", 60, 0, 0, 0);
     tabCase[2] = initProp(3, 100, "Taxe", 0, 5, 0, 0);
@@ -65,6 +66,22 @@ void initCases()
     tabCase[29] =  initProp(30, 350, "Bale", 350, 0, 0, 0);
     tabCase[30] =   initProp(31, 0, "Chance", 0, 1, 0, 0);
     tabCase[31] =   initProp(32, 400, "Woods", 400, 0, 0, 0);
+    // initialisation des cases de saut
+    tabCase[4] = initChgt(5, "ChgtTreize", 6, 13, 0);
+    tabCase[12] = initChgt(13, "ChgtVingtDeux", 6, 22, 0);
+    tabCase[20] = initChgt(21, "ChgtVingtNeuf", 6, 29, 0);
+    tabCase[28] = initChgt(29, "ChgtCing", 6, 5, 200);
+
+    printf("Les cases sont initialisees :\n");
+
+    for ( int i = 0; i < 32; i++ ){
+        printf("Case %d : %s\n", i+1 ,tabCase[i].nomPro );
+
+
+
+
+    }
+
 }
 
 void initCaseChangement()
