@@ -35,6 +35,7 @@ typedef struct
     int hypotheque;
     int numero;
     int numeroGroupes;
+    int numeroProprio;
     int nbMaison;
     int newCase;
     int nbHotel;

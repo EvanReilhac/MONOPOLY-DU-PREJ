@@ -160,6 +160,7 @@ void achatRue(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
                 if (prop->dispo == 0) {
                     pAcheteur->possessionParCase[prop->numero] = 0;
                     pAcheteur->nbProprietes = pAcheteur->nbProprietes +1;
+                    pAcheteur->possessionParGroupe[prop->numeroGroupes] += 1;
                     pAcheteur->argent = pAcheteur->argent - prop->prix;
                     pAcheteur->fortune = pAcheteur->fortune - prop->prix / 2;
                 }
@@ -489,6 +490,7 @@ Case initProp(int numero, int numeroGroupes, int loyer, char* nom, int prix, int
     //p.type = type;
     p.numero = numero;
     p.loyer = loyer;
+    p.numeroProprio = 0;
     strcpy(p.nomPro, nom);
     p.prix = prix;
     //p.nbMaison = nbMaison;
@@ -568,9 +570,19 @@ Case* initCases()
 }
 
 void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
+    int choix = 0;
     if (pProprio->possessionParCase[prop->numero] == 0){
-        printf("La rue %s n'est pas disponible à l'achat, merci de bien vouloir payé %d euros.", prop->nomPro,
+        printf("La rue %s n'est pas disponible à l'achat, merci de bien vouloir payer %d euros.", prop->nomPro,
                prop->loyer);
+        if (pAcheteur->argent < prop->loyer){
+            printf("Aie aie aie, sa sent le sapin. Voulez vous hypothequer une de vos proprietes? Si oui tapez 1 sinon tapez 0 et vous faites faillite\n");
+            scanf("%d", &choix);
+            if (choix == 1){
+
+            }
+
+        }
+
         pAcheteur->argent = pAcheteur->argent - prop->loyer;
         pAcheteur->fortune = pAcheteur->fortune - prop->loyer;
         pProprio->argent = pProprio->argent + prop->loyer;
@@ -665,3 +677,70 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
     }
 
 }
+
+ void fonctionHypoteque(Case* prop, Joueurs* pAcheteur) {
+     int choix = 1;
+     int choixBis = 1;
+     int choixBisBis = 0;
+     while (pAcheteur->argent < prop->loyer) {
+         printf("Vous avez différent choix qui s'offre a vous:1)Vendre une maison.\n 2)Vendre un hotel.\n3)Hypothequer une propriete.\n>");
+         scanf("%d", &choix);
+         switch (choix) {
+             case 1:
+                 for (int i = 0; i < NOMBRE_CASE; i++) {
+                     if (pAcheteur->possessionParCase[i] > 0 && pAcheteur->possessionParCase[i] <= 4) {
+                         printf("Voulez vous vendre une maison de la case %d?\n", prop->numero);
+                         printf("Si oui tapez 1 sinon tapez 0:\n>");
+                         scanf("%d", &choixBis);
+                         if (choixBis == 1) {
+                             printf("Vous vendez cette maison ce qui vous rapporte une coquette somme de %d",
+                                    prop->prixMaison / 2);
+                             pAcheteur->argent += prop->prixMaison / 2;
+                             pAcheteur->fortune += prop->prixMaison / 2;
+                             pAcheteur->nbMaisonsJ += -1;
+                             pAcheteur->possessionParCase[prop->numero] += -1;
+
+                         }
+                     }
+                 }
+                 break;
+             case 2:
+                 for (int i = 0; i < NOMBRE_CASE; i++) {
+                     if (pAcheteur->possessionParCase[i] == 5) {
+                         printf("Voulez vous vendre un hotel de la case %d?\n", prop->numero);
+                         printf("Si oui tapez 1 sinon tapez 0:\n>");
+                         scanf("%d", &choixBis);
+                         if (choixBis == 1) {
+                             printf("Vous vendez cet hotel ce qui vous rapporte une coquette somme de %d",
+                                    prop->prixMaison / 2);
+                             pAcheteur->argent += prop->prixMaison / 2;
+                             pAcheteur->fortune += prop->prixMaison / 2;
+                             pAcheteur->nbMaisonsJ += -1;
+                             pAcheteur->possessionParCase[prop->numero] += -1;
+
+                         }
+                     }
+                 }
+                 break;
+             case 3:
+                 for (int i = 0; i < NOMBRE_CASE; i++) {
+                     if (pAcheteur->possessionParCase[i] == 0) {
+                         printf("Voulez vous hypothequer la case %d?", prop->numero);
+                         printf("Si oui tapez 1, sinon tapez 0");
+                         scanf("%d", &choixBisBis);
+                         if (choixBisBis == 1) {
+                             printf("Vous hypotequer cette propriete ce qui vous rapporte une coquette somme de %d",
+                                    prop->prix / 2);
+                             pAcheteur->argent += prop->prix / 2;
+                             pAcheteur->fortune += prop->prix / 2;
+                             pAcheteur->possessionParCase[prop->numero] += -1;
+
+                         }
+                     }
+                 }
+
+
+         }
+
+     }
+ }
