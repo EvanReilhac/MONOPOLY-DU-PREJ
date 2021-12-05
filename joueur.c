@@ -27,6 +27,7 @@ Joueurs creerJoueur(int i){
     printf("Veuillez rentrer le pseudo du joueur %d \n >:", i+1 );
     fflush(stdin);
     fgets(player.nomJ,TAILLE_NOM_MAX, stdin );
+    player.nomJ[strlen(player.nomJ)-1] = '\0';
     player.fortune = 1500;
     player.argent = 1500;
     player.placement = 1;
@@ -40,30 +41,31 @@ Joueurs creerJoueur(int i){
     player.cartesPrison = 0;
     player.nbHypotheque = 0;
     player.possessionParCase = (int*) calloc(NOMBRE_CASE, sizeof (int));
-    for ( int h = 1 ;  h < NOMBRE_CASE/2 ; h++){
-        player.possessionParCase[2*h] = -2;
-        player.possessionParCase[2*h-1] = -3;
+    for ( int h = 1 ;  h < NOMBRE_CASE ; h = h + 2 ){
+        player.possessionParCase[h] = -2;
+        player.possessionParCase[h-1] = -3;
     }
     return player;
 }
 
-void initJoueur(int nbJoueurs){
+Joueurs* initJoueur(int nbJoueurs){
     Joueurs* tabJoueur  = (Joueurs*) calloc(nbJoueurs, sizeof (Joueurs));
-    printf("La liste des joueurs s'affichera quand vous aurez rentre vos pseudos: \n");
+
+    printf("La liste des joueurs s'affichera quand vous aurez rentre vos pseudos: \n\n");
     for ( int i = 0 ; i < nbJoueurs ; i++){
         tabJoueur[i] = creerJoueur(i);
     }
     for ( int  i = 0 ; i< nbJoueurs ; i++){
         printf("Le joueur %d est %s! Sa fortune est de %d, son argent est de %d il se trouve a la case depart,"
-               " possede %d maison et %d hotel, avec %d propriete et %d groupe de legendes de sport\n", tabJoueur[i].numeroJ , tabJoueur[i].nomJ,
+               " possede %d maison et %d hotel, avec %d propriete et %d groupe de legendes de sport\n\n", tabJoueur[i].numeroJ , tabJoueur[i].nomJ,
                tabJoueur[i].fortune, tabJoueur[i].argent , tabJoueur[i].nbMaisonsJ, tabJoueur[i].nbHotelsJ, tabJoueur[i].nbProprietes, tabJoueur[i].nbGroupes  );
 
     }
+    return tabJoueur;
 }
 
 
 
 
-void changerJoueur( Joueurs** player){
 
-}
+

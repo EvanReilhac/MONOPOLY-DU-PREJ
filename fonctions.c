@@ -8,182 +8,202 @@
 
 
 
+//player.possessionParCase[i + 3] != '\0'
+void groupePossedeJoueur(Joueurs player , Case* tabCase) {
+    for (int i = 1; i < NOMBRE_CASE ; i = i + 4 ) {
 
-void groupePossedeJoueur(Joueurs* player , Case** tabCase) {
-    for (int i = 0; player->possessionParCase[i + 3] != '\0'; i++) {
-        switch (player->possessionParCase[i]) {
+        switch (player.possessionParCase[i]) {
             case -1:
-                printf("\n %s a %s en hypotheque  ", player->nomJ, (*tabCase[i]).nomPro);
-                if ((*tabCase[i]).nomGroupe[0] == (*tabCase[i + 2]).nomGroupe[0]) {
-                    switch (player->possessionParCase[i + 2]) {
+                printf("\n %s a %s en hypotheque", player.nomJ, tabCase[i].nomPro);
+                if (tabCase[i].nomGroupe[0] == (tabCase[i + 2]).nomGroupe[0]) {
+                    switch (player.possessionParCase[i + 2]) {
                         case 0:
-                            printf("\t et possede egalement %s donc le groupe %s dont l'une des propriete est en hypotheque \n",(*tabCase[i + 2]).nomPro, (*tabCase[i + 2]).nomGroupe);
+                            printf(" et possede egalement %s donc le groupe %s dont l'une des propriete est en hypotheque\n",(tabCase[i + 2]).nomPro, (tabCase[i + 2]).nomGroupe);
                             break;
                         case -1:
-                            printf("\t et possede egalement %s en hypotheque donc le groupe %s en hypotheque \n",(*tabCase[i + 2]).nomPro, (*tabCase[i + 2]).nomGroupe);
+                            printf(" et possede egalement %s en hypotheque donc le groupe %s en hypotheque\n",(tabCase[i + 2]).nomPro, (tabCase[i + 2]).nomGroupe);
+                            break;
                     }
                 }
 
                 break;
             case 0:
-                printf(" %s possede %s qui est vierge\n", player->nomJ, (*tabCase[i]).nomPro);
-                if ((*tabCase[i]).nomGroupe[0] == (*tabCase[i + 2]).nomGroupe[0]){
-                    switch (player->possessionParCase[i + 2]) {
+                printf("\n%s possede %s qui est vierge", player.nomJ, (tabCase[i]).nomPro);
+                if ((tabCase[i]).nomGroupe[0] == (tabCase[i + 2]).nomGroupe[0]){
+                    switch (player.possessionParCase[i + 2]) {
                         case -1:
-                            printf("\t et possede egalement %s en hypotheque donc le groupe %s dont l'une des propriete est en hypotheque \n",
-                                   (*tabCase[i + 2]).nomPro, (*tabCase[i + 2]).nomGroupe);
+                            printf(" et %s en hypotheque donc le groupe %s \n",(tabCase[i + 2]).nomPro, (tabCase[i + 2]).nomGroupe);
                             break;
                         case 0:
-                            printf("\t et possede %s vierge aussi donc le groupe %s ", (*tabCase[i + 2]).nomPro,
-                                   (*tabCase[i + 2]).nomGroupe);
+                            printf(" et %s vierge aussi donc le groupe %s\n", (tabCase[i + 2]).nomPro,(tabCase[i + 2]).nomGroupe);
                             break;
                         case 1:
-                            printf("et possede %s avec 1 maison donc le groupe %s", (*tabCase[i + 2]).nomPro,
-                                   (*tabCase[i + 2]).nomGroupe);
+                            printf(" et %s avec 1 maison donc le groupe %s\n", (tabCase[i + 2]).nomPro,(tabCase[i + 2]).nomGroupe);
                             break;
                         case 2:
-                            printf("et possede %s avec 2 maisons donc le groupe %s", (*tabCase[i + 2]).nomPro,
-                                   (*tabCase[i + 2]).nomGroupe);
+                            printf(" et %s avec 2 maisons donc le groupe %s\n", (tabCase[i + 2]).nomPro,(tabCase[i + 2]).nomGroupe);
                             break;
                         case 3 :
-                            printf("et possede %s avec 3 maisons donc le groupe %s", (*tabCase[i + 2]).nomPro,
-                                   (*tabCase[i + 2]).nomGroupe);
+                            printf(" et %s avec 3 maisons donc le groupe %s\n", (tabCase[i + 2]).nomPro,(tabCase[i + 2]).nomGroupe);
                             break;
                         case 4:
-                            printf("et possede %s avec 4 maisons donc le groupe %s", (*tabCase[i + 2]).nomPro,
-                                   (*tabCase[i + 2]).nomGroupe);
+                            printf(" et %s avec 4 maisons donc le groupe %s\n", (tabCase[i + 2]).nomPro,(tabCase[i + 2]).nomGroupe);
                             break;
                         case 5:
-                            printf("et possede %s avec 1 hotel donc le groupe %s", (*tabCase[i + 2]).nomPro,
-                                   (*tabCase[i + 2]).nomGroupe);
+                            printf(" et %s avec 1 hotel donc le groupe %s\n", (tabCase[i + 2]).nomPro,(tabCase[i + 2]).nomGroupe);
                             break;
                     }
+
                 }
+                break;
                     case 1:
-                        printf(" %s possede %s avec 1 maison donc le groupe %s \n", player->nomJ, (*tabCase[i]).nomPro , (*tabCase[i + 2]).nomGroupe);
-                    if ((*tabCase[i]).nomGroupe[0] == (*tabCase[i + 2]).nomGroupe[0]){
-                        switch (player->possessionParCase[i + 2]) {
+                        printf("\n%s possede %s avec 1 maison donc le groupe %s", player.nomJ, (tabCase[i]).nomPro , (tabCase[i + 2]).nomGroupe);
+                    if ((tabCase[i]).nomGroupe[0] == (tabCase[i + 2]).nomGroupe[0]){
+                        switch (player.possessionParCase[i + 2]) {
                             case 0:
-                                printf("\t et possede %s vierge ", (*tabCase[i + 2]).nomPro);
+                                printf(" avec %s vierge\n", (tabCase[i + 2]).nomPro);
                                 break;
                             case 1:
-                                printf("\tet possede %s avec 1 maison", (*tabCase[i + 2]).nomPro);
+                                printf(" dont %s avec 1 maison\n", (tabCase[i + 2]).nomPro);
                                 break;
                             case 2:
-                                printf("\tet possede %s avec 2 maisons", (*tabCase[i + 2]).nomPro);
+                                printf(" dont %s avec 2 maisons\n", (tabCase[i + 2]).nomPro);
                                 break;
                             case 3 :
-                                printf("\tet possede %s avec 3 maisons", (*tabCase[i + 2]).nomPro);
+                                printf(" dont %s avec 3 maisons\n", (tabCase[i + 2]).nomPro);
                                 break;
                             case 4:
-                                printf("\tet possede %s avec 4 maisons", (*tabCase[i + 2]).nomPro);
+                                printf(" dont %s avec 4 maisons\n", (tabCase[i + 2]).nomPro);
                                 break;
                             case 5:
-                                printf("\tet possede %s avec 1 hotel", (*tabCase[i + 2]).nomPro);
+                                printf(" dont %s avec 1 hotel\n", (tabCase[i + 2]).nomPro);
                                 break;
 
                         }
+
                 }
+                break;
                         case 2:
-                            printf(" %s possede %s avec 2 maison donc le groupe %s \n", player->nomJ, (*tabCase[i]).nomPro , (*tabCase[i + 2]).nomGroupe);
-                        if ((*tabCase[i]).nomGroupe[0] == (*tabCase[i + 2]).nomGroupe[0]){
-                            switch (player->possessionParCase[i + 2]) {
+                            printf("\n%s possede %s avec 2 maison donc le groupe %s", player.nomJ, (tabCase[i]).nomPro , (tabCase[i + 2]).nomGroupe);
+                        if ((tabCase[i]).nomGroupe[0] == (tabCase[i + 2]).nomGroupe[0]){
+                            switch (player.possessionParCase[i + 2]) {
                                 case 0:
-                                    printf("\t et possede %s vierge ", (*tabCase[i + 2]).nomPro);
+                                    printf(" avec %s vierge\n", (tabCase[i + 2]).nomPro);
                                     break;
                                 case 1:
-                                    printf("\tet possede %s avec 1 maison", (*tabCase[i + 2]).nomPro);
+                                    printf(" dont %s avec 1 maison\n", (tabCase[i + 2]).nomPro);
                                     break;
                                 case 2:
-                                    printf("\tet possede %s avec 2 maisons", (*tabCase[i + 2]).nomPro);
+                                    printf(" dont %s avec 2 maisons\n", (tabCase[i + 2]).nomPro);
                                     break;
                                 case 3 :
-                                    printf("\tet possede %s avec 3 maisons", (*tabCase[i + 2]).nomPro);
+                                    printf(" dont %s avec 3 maisons\n", (tabCase[i + 2]).nomPro);
                                     break;
                                 case 4:
-                                    printf("\tet possede %s avec 4 maisons", (*tabCase[i + 2]).nomPro);
+                                    printf(" dont %s avec 4 maisons\n", (tabCase[i + 2]).nomPro);
                                     break;
                                 case 5:
-                                    printf("\tet possede %s avec 1 hotel", (*tabCase[i + 2]).nomPro);
+                                    printf(" dont %s avec 1 hotel\n", (tabCase[i + 2]).nomPro);
                                     break;
                             }
+
                 }
+                break;
                             case 3:
-                                printf(" %s possede %s avec 3 maisons donc le groupe %s \n", player->nomJ, (*tabCase[i]).nomPro , (*tabCase[i + 2]).nomGroupe);
-                            if ((*tabCase[i]).nomGroupe[0] == (*tabCase[i + 2]).nomGroupe[0]) {
-                                switch (player->possessionParCase[i + 2]) {
+                                printf("\n%s possede %s avec 3 maisons donc le groupe %s", player.nomJ, (tabCase[i]).nomPro , (tabCase[i + 2]).nomGroupe);
+                            if ((tabCase[i]).nomGroupe[0] == (tabCase[i + 2]).nomGroupe[0]) {
+                                switch (player.possessionParCase[i + 2]) {
                                     case 0:
-                                        printf("\t et possede %s vierge ", (*tabCase[i + 2]).nomPro);
+                                        printf(" avec %s vierge\n", (tabCase[i + 2]).nomPro);
                                         break;
                                     case 1:
-                                        printf("\tet possede %s avec 1 maison", (*tabCase[i + 2]).nomPro);
+                                        printf(" dont %s avec 1 maison\n", (tabCase[i + 2]).nomPro);
                                         break;
                                     case 2:
-                                        printf("\tet possede %s avec 2 maisons", (*tabCase[i + 2]).nomPro);
+                                        printf(" dont %s avec 2 maisons\n", (tabCase[i + 2]).nomPro);
                                         break;
                                     case 3 :
-                                        printf("\tet possede %s avec 3 maisons", (*tabCase[i + 2]).nomPro);
+                                        printf(" dont %s avec 3 maisons\n", (tabCase[i + 2]).nomPro);
                                         break;
                                     case 4:
-                                        printf("\tet possede %s avec 4 maisons", (*tabCase[i + 2]).nomPro);
+                                        printf(" dont %s avec 4 maisons\n", (tabCase[i + 2]).nomPro);
                                         break;
                                     case 5:
-                                        printf("\tet possede %s avec 1 hotel", (*tabCase[i + 2]).nomPro);
+                                        printf(" dont %s avec 1 hotel\n", (tabCase[i + 2]).nomPro);
                                         break;
                                 }
+
                             }
+                break;
                                 case 4:
-                                    printf(" %s possede %s avec 4 maisons donc le groupe %s \n", player->nomJ, (*tabCase[i]).nomPro , (*tabCase[i + 2]).nomGroupe);
-                                if ((*tabCase[i]).nomGroupe[0] == (*tabCase[i + 2]).nomGroupe[0]) {
-                                    switch (player->possessionParCase[i + 2]) {
+                                    printf("\n%s possede %s avec 4 maisons donc le groupe %s", player.nomJ, (tabCase[i]).nomPro , (tabCase[i + 2]).nomGroupe);
+                                if ((tabCase[i]).nomGroupe[0] == (tabCase[i + 2]).nomGroupe[0]) {
+                                    switch (player.possessionParCase[i + 2]) {
                                         case 0:
-                                            printf("\t et possede %s vierge ", (*tabCase[i + 2]).nomPro);
+                                            printf(" avec %s vierge\n", (tabCase[i + 2]).nomPro);
                                             break;
                                         case 1:
-                                            printf("\tet possede %s avec 1 maison", (*tabCase[i + 2]).nomPro);
+                                            printf(" dont %s avec 1 maison\n", (tabCase[i + 2]).nomPro);
                                             break;
                                         case 2:
-                                            printf("\tet possede %s avec 2 maisons", (*tabCase[i + 2]).nomPro);
+                                            printf(" dont %s avec 2 maisons", (tabCase[i + 2]).nomPro);
                                             break;
                                         case 3 :
-                                            printf("\tet possede %s avec 3 maisons", (*tabCase[i + 2]).nomPro);
+                                            printf(" dont %s avec 3 maisons\n", (tabCase[i + 2]).nomPro);
                                             break;
                                         case 4:
-                                            printf("\tet possede %s avec 4 maisons", (*tabCase[i + 2]).nomPro);
+                                            printf(" dont %s avec 4 maisons\n", (tabCase[i + 2]).nomPro);
                                             break;
                                         case 5:
-                                            printf("\tet possede %s avec 1 hotel", (*tabCase[i + 2]).nomPro);
+                                            printf(" dont %s avec 1 hotel\n", (tabCase[i + 2]).nomPro);
                                             break;
                                     }
+
                                 }
+                break;
                                     case 5:
-                                        printf(" %s possede %s avec 1 hotel donc le groupe %s \n", player->nomJ,
-                                               (*tabCase[i]).nomPro, (*tabCase[i + 2]).nomGroupe);
-                                    if ((*tabCase[i]).nomGroupe[0] == (*tabCase[i + 2]).nomGroupe[0]) {
-                                        switch (player->possessionParCase[i + 2]) {
+                                        printf("\n%s possede %s avec 1 hotel donc le groupe %s", player.nomJ,(tabCase[i]).nomPro, (tabCase[i + 2]).nomGroupe);
+                                    if ((tabCase[i]).nomGroupe[0] == (tabCase[i + 2]).nomGroupe[0]) {
+                                        switch (player.possessionParCase[i + 2]) {
                                             case 0:
-                                                printf("\t et possede %s vierge ", (*tabCase[i + 2]).nomPro);
+                                                printf(" avec %s vierge\n", (tabCase[i + 2]).nomPro);
                                                 break;
                                             case 1:
-                                                printf("\tet possede %s avec 1 maison", (*tabCase[i + 2]).nomPro);
+                                                printf(" dont %s avec 1 maison\n", (tabCase[i + 2]).nomPro);
                                                 break;
                                             case 2:
-                                                printf("\tet possede %s avec 2 maisons", (*tabCase[i + 2]).nomPro);
+                                                printf(" dont %s avec 2 maisons\n", (tabCase[i + 2]).nomPro);
                                                 break;
                                             case 3 :
-                                                printf("\tet possede %s avec 3 maisons", (*tabCase[i + 2]).nomPro);
+                                                printf(" dont %s avec 3 maisons\n", (tabCase[i + 2]).nomPro);
                                                 break;
                                             case 4:
-                                                printf("\tet possede %s avec 4 maisons", (*tabCase[i + 2]).nomPro);
+                                                printf(" dont %s avec 4 maisons\n", (tabCase[i + 2]).nomPro);
                                                 break;
                                             case 5:
-                                                printf("\tet possede %s avec 1 hotel", (*tabCase[i + 2]).nomPro);
+                                                printf(" dont %s avec 1 hotel\n", (tabCase[i + 2]).nomPro);
                                                 break;
                                         }
+                                        break;
+                                        default:
+                                            switch (player.possessionParCase[i + 2]){
+                                                case -1:
+                                                    printf("\n%s a %s en hypotheque\n",player.nomJ, tabCase[i+2].nomPro );
+                                                    break;
+                                                case 0:
+                                                    printf("\n%s possssssede %s qui est vierge\n", player.nomJ, tabCase[i+2].nomPro);
+                                                    break;
+                                            }
+
                                     }
+                break;
                                 }
 
 
     }
 
-}
+
+
+        }
+
+
