@@ -409,25 +409,27 @@ void typeCartes(Case* prop, Joueurs* player, Joueurs* pProprio, CartesChance* pa
             achatRue(prop, player, pProprio);
             break;
         case 1:
+            printf("Vous etes tombe sur la case carte chance, vous allez piocher une carte :\n");
             melangerCartesChance(paquetChance);
             int nbCartesPioches = 0;
-            attributionCarteChance(paquetChance[nbCartesPioches].numero, player);
-            nbCartesPioches++;
-            if(nbCartesPioches == 10) {
+            while(nbCartesPioches != 10) {
+                attributionCarteChance(paquetChance[nbCartesPioches].numero, player);
+                nbCartesPioches++;
+            }
                 nbCartesPioches = 0;
                 melangerCartesChance(paquetChance);
-            }
             break;
 
         case 2:
+            printf("Vous etes tombe sur la case carte communaute, vous allez piocher une carte :\n");
             melangerCartesCommunaute(paquetChance);
             int nbCartesPioches = 0;
-            attributionCarteCommunaute(paquetChance[nbCartesPioches].numero, player);
-            nbCartesPioches++;
-            if(nbCartesPioches == 10) {
+            while(nbCartesPioches != 10) {
+                attributionCarteCommunaute(paquetChance[nbCartesPioches].numero, player);
+                nbCartesPioches++;
+            }
                 nbCartesPioches = 0;
                 melangerCartesCommunaute(paquetChance);
-            }
             break;
         case 3:
             caseDepart(player);
