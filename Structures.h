@@ -38,19 +38,24 @@ typedef struct
     int nbMaison;
     int newCase;
     int nbHotel;
-    int* prixMaison;
+    int prixMaison;
     char nomGroupe[TAILLE_NOM_MAX];
     int possibilite; // 0 disponible , le chiffre de dizaine indique le joueur et l'unité le nombre de maisons : 10 possede par j1, 11 avec 1 maison
 }Case;
 
-typedef struct {
+typedef struct
+{
     char nomCarte[TAILLE_NOM_MAX];
     int numero;
+    int prixAPayer;
+    int prixARecevoir;
 } CartesChance;
 
 typedef struct {
     char nomCarte[TAILLE_NOM_MAX];
     int numero;
+    int prixAPayer;
+    int prixARecevoir;
 } CartesCommunaute;
 
 #endif //MONOPOLY_STRUCTURES_H
