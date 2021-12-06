@@ -1,3 +1,10 @@
+//
+// Created by User on 06-12-21.
+//
+
+#ifndef MONOPOLYJM_FONCTION_H
+#define MONOPOLYJM_FONCTION_H
+
 #include "MACRO.h"
 #include "STRUCTURE.h"
 
@@ -29,4 +36,8 @@ void typeCartes(Case* prop, Joueurs* player, Joueurs* pProprio, CartesChance* pa
 void fonctionHypoteque(Case* prop, Joueurs* pAcheteur, int prix);
 void goPrison(Joueurs* joueur);
 
-#endif //MONOPOLY_FONCTION_H
+
+
+
+
+#endif //MONOPOLYJM_FONCTION_H

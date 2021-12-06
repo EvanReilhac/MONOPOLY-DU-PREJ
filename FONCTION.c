@@ -1,16 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include "fonction.h"
-#include "STRUCTURE.h"
-#include "MACRO.h"
-
-
-
+//
+// Created by User on 06-12-21.
+//
 
 #include "FONCTION.h"
-
 
 int getRandomInteger() {
 
@@ -46,11 +38,11 @@ void dooble(int* desUn, int* desDeux, int* total) {
                     *total = jeuDes(desUn, desDeux);
                     if (*desUn == *desDeux){
                         printf("PAS DE CHANCE!!! Vous venez de faire 3 doubles de suite.\nDirection la prison...");
-                }
                     }
                 }
-
             }
+
+        }
 
 
     } else {
@@ -62,10 +54,10 @@ void dooble(int* desUn, int* desDeux, int* total) {
 int nombreJoueur() {
     int nbJoueurs = 0;
     while ((nbJoueurs < 2) || (nbJoueurs > 6)) {
-        printf("Bonjour a tous, bienvenue dans le monopoly des LEGENDES DU SPORT.\nVeuillez saisir le nombre de participant:\n>");
+        printf("Bonjour a tous, bienvenue dans le monopoly des LEGENDES DU SPORT.\nVeuillez saisir le nombre de participants:\n>");
         scanf("%d", &nbJoueurs);
         if (nbJoueurs < 2) {
-            printf("Vous ne pouvez pas jouer tout seule... Allez chercher un amis!!\n");
+            printf("Vous ne pouvez pas jouer tout seul... Allez chercher un ami!!\n");
         } else if (nbJoueurs > 6) {
             printf("Vous etes trop nombreux...Jouez seulement entre vrais amis. :)\n");
 
@@ -94,7 +86,6 @@ int nombreJoueur() {
     //longueur = strlen(motEnAttente);
     //tableau[i] = (char *) calloc(longueur, sizeof(char));
     //strcpy(tableau[i], motEnAttente);
-
 return p;
 }*/
 
@@ -113,9 +104,6 @@ return p;
     p->hypotheque = hypotheque;
     return p;
 }
-
-
-
 void tablJoueurs(Joueurs*** tabNom, int* taille, int* nbJoueurs, char* nom, int placement, int argent, int nbProprietes, int nbGroupes , int nbMaisons, int nbHotels, int cartesPrison, int faillite, int hypotheque) {
     while (*taille < *nbJoueurs) {
         if (*taille == 0) {
@@ -129,11 +117,9 @@ void tablJoueurs(Joueurs*** tabNom, int* taille, int* nbJoueurs, char* nom, int 
         (*taille)++;
     }
 }
-
 void afficher(Joueurs* c) {
     printf("\"%s\", case numero %d, %d euros, %d proprietes, %d groupes, %d maisons, %d hotels, %d cartes prison, %d faillite, %d hypotheques.\n", c->nom, c->argent, c->nbProprietes, c->nbGroupes, c->nbMaisons, c->nbHotels, c->cartesPrison, c->faillite, c->hypotheque);
 }
-
 void afficherTous(Joueurs** tablNom, int taille) {
     int i = 0;
     for (i = 0; i < taille; i++) {
@@ -152,7 +138,7 @@ void achatRue(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
         }
         else if (prop->dispo == 1){
             if (pAcheteur->argent < prop->prix){
-                printf("Vous etes pauvres...Enrichissez vous pour esperer aquerir de tel biens.\n");
+                printf("Vous etes pauvres...Enrichissez vous pour esperer aquerir de tels biens.\n");
             }
             else {
                 printf("La rue %s est disponible a l'achat, pour l'acheter taper 0 sinon taper 1:\n>", prop->nomPro);
@@ -172,13 +158,13 @@ void achatRue(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
 
     }
     else if  (pAcheteur->possessionParCase[prop->numero] == 0){
-        printf("Vous etes chez vous...Que sa fait du bien de retrouver le parfum de la maison.\n");
+        printf("Vous etes chez vous...Que ca fait du bien de retrouver le parfum de la maison.\n");
         if (pAcheteur->possessionParGroupe[prop->numeroGroupes] == 2){
             achatMaison(prop, pAcheteur);
         }
     }
     else if (pAcheteur->possessionParCase[prop->numero] == -1) {
-        printf("Malheuresement votre maison est hypothequer apres vos deboirs financiers...Esperer vous refaire la cerise pour pouvoir apporter des modifs a votre rue.\n");
+        printf("Malheuresement votre maison est hypothequee apres vos deboirs financiers...Esperer vous refaire la cerise pour pouvoir apporter des modifs a votre rue.\n");
     }
 }
 
@@ -189,7 +175,7 @@ int placement( Joueurs* p){
     int choix = 0, a= 0;
     int desUn = 0, desDeux = 0;
     int total = 0;
-    printf("veuillez choisir parmis les options suivantes:\n 1) Lancez votre des.\n 2) quittez la partie.\n>");
+    printf("veuillez choisir parmi les options suivantes:\n 1) Lancez votre de.\n 2) quittez la partie.\n>");
     scanf("%d", &choix);
     switch(choix){
         case 1:
@@ -197,11 +183,11 @@ int placement( Joueurs* p){
             printf("Le total est de %d.", a);
             dooble(&desUn, &desDeux, &total);
             p->placement = p->placement + a;
-            printf("Déplacer vous à la case %d", p->placement);
+            printf("Déplacer vous a la case %d", p->placement);
             p->placement = p->placement + total;
             break;
         case 2:
-            printf("Vous avez quitter la partie.");
+            printf("Vous avez quitte la partie.");
             break;
         default:
             return 0;
@@ -434,22 +420,22 @@ void typeCartes(Case* prop, Joueurs* player, Joueurs* pProprio, CartesChance* pa
             break;
 
         case 2:
-        //fonction jm cartes communauté
-           break;
+            //fonction jm cartes communauté
+            break;
         case 3:
-        caseDepart(player);
+            caseDepart(player);
             break;
         case 4:
-        printf("Quel grand coeur!!!Vous rendez visite à Oscar Pistorius pour le soutenir\n");
+            printf("Quel grand coeur!!!Vous rendez visite a Oscar Pistorius pour le soutenir\n");
             break;
         case 5:
-        perteOuGainArgent(player, prop);
+            perteOuGainArgent(player, prop);
             break;
         case 6:
             changement(player);
             break;
     }
-    }
+}
 
 
 
@@ -590,12 +576,12 @@ Case* initCases()
 void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
     int choix = 0;
     if (pProprio->possessionParCase[prop->numero] == 0){
-        printf("La rue %s n'est pas disponible à l'achat, merci de bien vouloir payer %d euros.", prop->nomPro,
+        printf("La rue %s n'est pas disponible a l'achat, merci de bien vouloir payer %d euros.", prop->nomPro,
                prop->loyer);
         if (pAcheteur->argent < prop->loyer){
-                fonctionHypoteque(prop, pAcheteur, prop->loyer);
+            fonctionHypoteque(prop, pAcheteur, prop->loyer);
 
-            }
+        }
 
 
 
@@ -605,54 +591,54 @@ void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
         pProprio->fortune = pProprio->fortune + prop->loyer;
     }
     else if (pProprio->possessionParCase[prop->numero] == 1){
-        printf("La rue %s n'est pas disponible à l'achat, une maison a ete construite... merci de bien vouloir payé %d euros.", prop->nomPro,
+        printf("La rue %s n'est pas disponible a l'achat, une maison a ete construite... merci de bien vouloir payer %d euros.", prop->nomPro,
                prop->loyer + prop->loyer/4);
         if (pAcheteur->argent < prop->loyer){
             fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer/4);
         }
         else {
-        pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer/4;
-        pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer/4;
-        pProprio->argent = pProprio->argent + prop->loyer + prop->loyer/4;
-        pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer/4;
+            pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer/4;
+            pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer/4;
+            pProprio->argent = pProprio->argent + prop->loyer + prop->loyer/4;
+            pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer/4;
 
 
         }
 
     }
     else if (pProprio->possessionParCase[prop->numero] == 2){
-        printf("La rue %s n'est pas disponible à l'achat, deux maisons ont ete construite... merci de bien vouloir payé %d euros.", prop->nomPro,
+        printf("La rue %s n'est pas disponible a l'achat, deux maisons ont ete construite... merci de bien vouloir payer %d euros.", prop->nomPro,
                prop->loyer + prop->loyer/2);
         if (pAcheteur->argent < prop->loyer){
             fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer/2);
 
         }
         else{
-        pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer/2;
-        pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer/2;
-        pProprio->argent = pProprio->argent + prop->loyer + prop->loyer/2;
-        pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer/2;
+            pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer/2;
+            pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer/2;
+            pProprio->argent = pProprio->argent + prop->loyer + prop->loyer/2;
+            pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer/2;
 
         }
     }
     else if (pProprio->possessionParCase[prop->numero] == 3){
-        printf("La rue %s n'est pas disponible à l'achat. Aie!! trois maisons ont ete construite... merci de bien vouloir payé %d euros.", prop->nomPro,
+        printf("La rue %s n'est pas disponible à l'achat. Aie!! trois maisons ont ete construite... merci de bien vouloir payer %d euros.", prop->nomPro,
                prop->loyer + prop->loyer*3/4);
         if (pAcheteur->argent < prop->loyer){
             fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer*3/4);
 
         }
         else{
-        pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer*3/4;
-        pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer*3/4;
-        pProprio->argent = pProprio->argent + prop->loyer + prop->loyer*3/4;
-        pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer*3/4;
+            pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer*3/4;
+            pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer*3/4;
+            pProprio->argent = pProprio->argent + prop->loyer + prop->loyer*3/4;
+            pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer*3/4;
 
         }
 
     }
     else if (pProprio->possessionParCase[prop->numero] == 4){
-        printf("La rue %s n'est pas disponible à l'achat. Sa commence a piquer, quatres maisons ont ete construite... merci de bien vouloir payé %d euros.", prop->nomPro,
+        printf("La rue %s n'est pas disponible à l'achat. Ca commence a piquer, quatres maisons ont ete construite... merci de bien vouloir payer %d euros.", prop->nomPro,
                prop->loyer + prop->loyer);
         if (pAcheteur->argent < prop->loyer){
             fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer);
@@ -667,7 +653,7 @@ void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
 
     }
     else if (pProprio->possessionParCase[prop->numero] == 5){
-        printf("La rue %s n'est pas disponible à l'achat. Coup dur!!! un hotel a ete construit... merci de bien vouloir payé %d euros.", prop->nomPro,
+        printf("La rue %s n'est pas disponible à l'achat. Coup dur!!! un hotel a ete construit... merci de bien vouloir payer %d euros.", prop->nomPro,
                3*prop->loyer);
         if (pAcheteur->argent < prop->loyer){
             fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer+3*prop->loyer);
@@ -696,7 +682,7 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
     }
     else{
         if (pAcheteur->possessionParCase[prop->numero] == 4){
-            printf("Souhaitez vous acheter un hotel a %d pour embellir votre rue? Si oui tapez 1 sinon tapez 0:\n>");
+            printf("Souhaitez-vous acheter un hotel a %d pour embellir votre rue? Si oui tapez 1 sinon tapez 0:\n>");
             scanf("%f", &choix);
             if (choix == 0){
                 printf("Vous etes petit joueur...");
@@ -707,16 +693,16 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
                 pAcheteur->possessionParCase[prop->numero] = pAcheteur->possessionParCase[prop->numero] + 1;
                 pAcheteur->argent += - prop->prixMaison;
                 pAcheteur->fortune += - prop->prixMaison;
-        }
-        else {
-                printf("Souhaitez vouz acheter une maison a %d pour embellir votre rue? Si oui tapez 1 sinon tapez 0:\n>",
+            }
+            else {
+                printf("Souhaitez-vouz acheter une maison a %d pour embellir votre rue? Si oui tapez 1 sinon tapez 0:\n>",
                        prop->prixMaison);
 
                 scanf("%f", &choix);
                 if (choix == 0) {
                     printf("Vous etes petit joueur...");
                 } else if (choix == 1) {
-                    printf(" Vous faites l'acquisition d'une nouvelle maison.\n");
+                    printf("Vous faites l'acquisition d'une nouvelle maison.\n");
                     pAcheteur->possessionParCase[prop->numero] = pAcheteur->possessionParCase[prop->numero] + 1;
                     pAcheteur->argent += - prop->prixMaison;
                     pAcheteur->fortune += - prop->prixMaison;
@@ -730,77 +716,77 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
 
 }
 
- void fonctionHypoteque(Case* prop, Joueurs* pAcheteur, int prix) {
-     int choix = 1;
-     int choixBis = 1;
-     int choixBisBis = 0;
-     printf("Aie aie aie, sa sent le sapin. Vous devez hypothequer.\n");
-     while (pAcheteur->argent < prix) {
-         printf("Vous avez différent choix qui s'offre a vous:\n1)Vendre une maison.\n 2)Vendre un hotel.\n3)Hypothequer une propriete.\n>");
-         scanf("%d", &choix);
-         switch (choix) {
-             case 1:
-                 for (int i = 0; i < NOMBRE_CASE; i++) {
-                     if (pAcheteur->possessionParCase[i] > 0 && pAcheteur->possessionParCase[i] <= 4) {
-                         printf("Voulez vous vendre une maison de la case %d?\n", prop->numero);
-                         printf("Si oui tapez 1 sinon tapez 0:\n>");
-                         scanf("%d", &choixBis);
-                         if (choixBis == 1) {
-                             printf("Vous vendez cette maison ce qui vous rapporte une coquette somme de %d",
-                                    prop->prixMaison / 2);
-                             pAcheteur->argent += prop->prixMaison / 2;
-                             pAcheteur->fortune += prop->prixMaison / 2;
-                             pAcheteur->nbMaisonsJ += -1;
-                             pAcheteur->possessionParCase[prop->numero] += -1;
+void fonctionHypoteque(Case* prop, Joueurs* pAcheteur, int prix) {
+    int choix = 1;
+    int choixBis = 1;
+    int choixBisBis = 0;
+    printf("Aie aie aie, ca sent le sapin. Vous devez hypothequer.\n");
+    while (pAcheteur->argent < prix) {
+        printf("Vous avez differents choix qui s'offrent a vous:\n1)Vendre une maison.\n 2)Vendre un hotel.\n3)Hypothequer une propriete.\n>");
+        scanf("%d", &choix);
+        switch (choix) {
+            case 1:
+                for (int i = 0; i < NOMBRE_CASE; i++) {
+                    if (pAcheteur->possessionParCase[i] > 0 && pAcheteur->possessionParCase[i] <= 4) {
+                        printf("Voulez vous vendre une maison de la case %d?\n", prop->numero);
+                        printf("Si oui tapez 1 sinon tapez 0:\n>");
+                        scanf("%d", &choixBis);
+                        if (choixBis == 1) {
+                            printf("Vous vendez cette maison ce qui vous rapporte une coquette somme de %d",
+                                   prop->prixMaison / 2);
+                            pAcheteur->argent += prop->prixMaison / 2;
+                            pAcheteur->fortune += prop->prixMaison / 2;
+                            pAcheteur->nbMaisonsJ += -1;
+                            pAcheteur->possessionParCase[prop->numero] += -1;
 
-                         }
-                     }
-                     else{
-                         printf("Vous n'avez pas de maison...\n");
-                     }
-                 }
-                 break;
-             case 2:
-                 for (int i = 0; i < NOMBRE_CASE; i++) {
-                     if (pAcheteur->possessionParCase[i] == 5) {
-                         printf("Voulez vous vendre un hotel de la case %d?\n", prop->numero);
-                         printf("Si oui tapez 1 sinon tapez 0:\n>");
-                         scanf("%d", &choixBis);
-                         if (choixBis == 1) {
-                             printf("Vous vendez cet hotel ce qui vous rapporte une coquette somme de %d",
-                                    prop->prixMaison / 2);
-                             pAcheteur->argent += prop->prixMaison / 2;
-                             pAcheteur->fortune += prop->prixMaison / 2;
-                             pAcheteur->nbMaisonsJ += -1;
-                             pAcheteur->possessionParCase[prop->numero] += -1;
+                        }
+                    }
+                    else{
+                        printf("Vous n'avez pas de maison...\n");
+                    }
+                }
+                break;
+            case 2:
+                for (int i = 0; i < NOMBRE_CASE; i++) {
+                    if (pAcheteur->possessionParCase[i] == 5) {
+                        printf("Voulez vous vendre un hotel de la case %d?\n", prop->numero);
+                        printf("Si oui tapez 1 sinon tapez 0:\n>");
+                        scanf("%d", &choixBis);
+                        if (choixBis == 1) {
+                            printf("Vous vendez cet hotel ce qui vous rapporte une coquette somme de %d",
+                                   prop->prixMaison / 2);
+                            pAcheteur->argent += prop->prixMaison / 2;
+                            pAcheteur->fortune += prop->prixMaison / 2;
+                            pAcheteur->nbMaisonsJ += -1;
+                            pAcheteur->possessionParCase[prop->numero] += -1;
 
-                         }
-                     }
-                 }
-                 break;
-             case 3:
-                 for (int i = 0; i < NOMBRE_CASE; i++) {
-                     if (pAcheteur->possessionParCase[i] == 0) {
-                         printf("Voulez vous hypothequer la case %d?", prop->numero);
-                         printf("Si oui tapez 1, sinon tapez 0");
-                         scanf("%d", &choixBisBis);
-                         if (choixBisBis == 1) {
-                             printf("Vous hypotequer cette propriete ce qui vous rapporte une coquette somme de %d",
-                                    prop->prix / 2);
-                             pAcheteur->argent += prop->prix / 2;
-                             pAcheteur->fortune += prop->prix / 2;
-                             pAcheteur->possessionParCase[prop->numero] += -1;
-                             prop->hypotheque = 1;
+                        }
+                    }
+                }
+                break;
+            case 3:
+                for (int i = 0; i < NOMBRE_CASE; i++) {
+                    if (pAcheteur->possessionParCase[i] == 0) {
+                        printf("Voulez vous hypothequer la case %d?", prop->numero);
+                        printf("Si oui tapez 1, sinon tapez 0");
+                        scanf("%d", &choixBisBis);
+                        if (choixBisBis == 1) {
+                            printf("Vous hypotequeZ cette propriete ce qui vous rapporte une coquette somme de %d",
+                                   prop->prix / 2);
+                            pAcheteur->argent += prop->prix / 2;
+                            pAcheteur->fortune += prop->prix / 2;
+                            pAcheteur->possessionParCase[prop->numero] += -1;
+                            prop->hypotheque = 1;
 
-                         }
-                     }
-                 }
-                 break;
+                        }
+                    }
+                }
+                break;
 
-             default:
-                 printf("Votre QI est deficient...Veuillez taper une valeur entre 1 et 3");
+            default:
+                printf("Votre QI est deficient...Veuillez taper une valeur entre 1 et 3");
 
-         }
+        }
 
-     }
- }
+    }
+}
