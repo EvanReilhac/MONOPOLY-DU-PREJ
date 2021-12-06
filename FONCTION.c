@@ -420,7 +420,14 @@ void typeCartes(Case* prop, Joueurs* player, Joueurs* pProprio, CartesChance* pa
             break;
 
         case 2:
-            //fonction jm cartes communauté
+            melangerCartesCommunaute(paquetChance);
+            int nbCartesPioches = 0;
+            attributionCarteCommunaute(paquetChance[nbCartesPioches].numero, player);
+            nbCartesPioches++;
+            if(nbCartesPioches == 10) {
+                nbCartesPioches = 0;
+                melangerCartesCommunaute(paquetChance);
+            }
             break;
         case 3:
             caseDepart(player);
