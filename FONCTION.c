@@ -221,23 +221,38 @@ void perteOuGainArgent(Joueurs* joueur, Case* tabCase)
     if(joueur->placement == 3)
     {
         printf("Vous payez une place de foot 100euros, vous allez au match, sauf que le match est annule car un joueur se prend une bouteille cristaline dans la tete et meurt soudainement.. Vous perdez 100euros. \n");
-        joueur->argent -= 100;
-        joueur->fortune -= 100;
-        fonctionHypoteque(&tabCase[2], joueur, 100);
+        if (joueur->argent < 100){
+            fonctionHypoteque(&tabCase[18], joueur, 100);
+        }
+        else {
+            joueur->argent -= 100;
+            joueur->fortune -= 100;
+        }
     }
     else if (joueur->placement == 11)
     {
         printf("Vous cassez une voiture de golf en faisant une course contre votre grand pere qui lui est en deambulateur, vous gagnez la course mais perdez 100euros pour reparer la voiture de golf. \n");
-        joueur->argent -= 100;
-        joueur->fortune -= 100;
-        fonctionHypoteque(&tabCase[10], joueur, 100);
+        if (joueur->argent < 100){
+            fonctionHypoteque(&tabCase[18], joueur, 100);
+        }
+        else {
+            joueur->argent -= 100;
+            joueur->fortune -= 100;
+        }
+
     }
     else if (joueur->argent == 19)
     {
         printf("Vous apercevez Mohamed Ali dans un reve qui vous dit de vous battre avec le prochain inconnu que vous croisez. Vous rencotrez Conor McGreggor et donc vous le chauffez pour vous battre avec. Sans surprise vous perdez et donc devez payer 200euros de chirurgie estethique. \n");
-        joueur->argent -= 100;
-        joueur->fortune -=100;
-        fonctionHypoteque(&tabCase[18], joueur, 100);
+        if (joueur->argent < 100){
+            fonctionHypoteque(&tabCase[18], joueur, 100);
+        }
+        else {
+            joueur->argent -= 100;
+            joueur->fortune -= 100;
+        }
+
+
     }
     else if(joueur->placement == 27)
     {
@@ -592,12 +607,15 @@ void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
     else if (pProprio->possessionParCase[prop->numero] == 1){
         printf("La rue %s n'est pas disponible à l'achat, une maison a ete construite... merci de bien vouloir payé %d euros.", prop->nomPro,
                prop->loyer + prop->loyer/4);
+        if (pAcheteur->argent < prop->loyer){
+            fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer/4);
+        }
+        else {
         pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer/4;
         pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer/4;
         pProprio->argent = pProprio->argent + prop->loyer + prop->loyer/4;
         pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer/4;
-        if (pAcheteur->argent < prop->loyer){
-        fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer/4);
+
 
         }
 
@@ -605,24 +623,30 @@ void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
     else if (pProprio->possessionParCase[prop->numero] == 2){
         printf("La rue %s n'est pas disponible à l'achat, deux maisons ont ete construite... merci de bien vouloir payé %d euros.", prop->nomPro,
                prop->loyer + prop->loyer/2);
+        if (pAcheteur->argent < prop->loyer){
+            fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer/2);
+
+        }
+        else{
         pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer/2;
         pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer/2;
         pProprio->argent = pProprio->argent + prop->loyer + prop->loyer/2;
         pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer/2;
-        if (pAcheteur->argent < prop->loyer){
-            fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer/2);
 
         }
     }
     else if (pProprio->possessionParCase[prop->numero] == 3){
         printf("La rue %s n'est pas disponible à l'achat. Aie!! trois maisons ont ete construite... merci de bien vouloir payé %d euros.", prop->nomPro,
                prop->loyer + prop->loyer*3/4);
+        if (pAcheteur->argent < prop->loyer){
+            fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer*3/4);
+
+        }
+        else{
         pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer*3/4;
         pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer*3/4;
         pProprio->argent = pProprio->argent + prop->loyer + prop->loyer*3/4;
         pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer*3/4;
-        if (pAcheteur->argent < prop->loyer){
-            fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer*3/4);
 
         }
 
@@ -630,26 +654,32 @@ void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
     else if (pProprio->possessionParCase[prop->numero] == 4){
         printf("La rue %s n'est pas disponible à l'achat. Sa commence a piquer, quatres maisons ont ete construite... merci de bien vouloir payé %d euros.", prop->nomPro,
                prop->loyer + prop->loyer);
-        pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer;
-        pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer;
-        pProprio->argent = pProprio->argent + prop->loyer + prop->loyer;
-        pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer;
         if (pAcheteur->argent < prop->loyer){
             fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer);
 
-            }
+        }
+        else {
+            pAcheteur->argent = pAcheteur->argent - prop->loyer + prop->loyer;
+            pAcheteur->fortune = pAcheteur->fortune - prop->loyer + prop->loyer;
+            pProprio->argent = pProprio->argent + prop->loyer + prop->loyer;
+            pProprio->fortune = pProprio->fortune + prop->loyer + prop->loyer;
+        }
+
     }
     else if (pProprio->possessionParCase[prop->numero] == 5){
         printf("La rue %s n'est pas disponible à l'achat. Coup dur!!! un hotel a ete construit... merci de bien vouloir payé %d euros.", prop->nomPro,
                3*prop->loyer);
-        pAcheteur->argent = pAcheteur->argent - 3*prop->loyer;
-        pAcheteur->fortune = pAcheteur->fortune - 3*prop->loyer;
-        pProprio->argent = pProprio->argent + 3*prop->loyer;
-        pProprio->fortune = pProprio->fortune + 3*prop->loyer;
         if (pAcheteur->argent < prop->loyer){
             fonctionHypoteque(prop, pAcheteur, prop->loyer+prop->loyer+3*prop->loyer);
 
         }
+        else {
+            pAcheteur->argent = pAcheteur->argent - 3 * prop->loyer;
+            pAcheteur->fortune = pAcheteur->fortune - 3 * prop->loyer;
+            pProprio->argent = pProprio->argent + 3 * prop->loyer;
+            pProprio->fortune = pProprio->fortune + 3 * prop->loyer;
+        }
+
 
     }
 }
