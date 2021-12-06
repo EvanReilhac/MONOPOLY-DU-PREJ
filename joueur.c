@@ -1,10 +1,11 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include "Fonctions.h"
-#include "Structures.h"
-#include "Macro.h"
+//evan version
+#include "joueur.h"
+#include "structure.h"
+#include "string.h"
+#include "stdio.h"
+#include "stdlib.h"
+
+
 
 int nombreJoueur() {
     int nbJoueurs = 0;
@@ -21,9 +22,9 @@ int nombreJoueur() {
     return nbJoueurs;
 }
 
-Joueurs creerJoueur(int i){
+Joueurs creerJoueur(int i, int nbJ){
     Joueurs player;
-    printf("Veuillez rentrer le pseudo du joueur %d \n >:", i+1 );
+    printf("Veuillez rentrer le pseudo du joueur %d :\n >", i+1 );
     fflush(stdin);
     fgets(player.nomJ,TAILLE_NOM_MAX, stdin );
     player.nomJ[strlen(player.nomJ)-1] = '\0';
@@ -39,6 +40,9 @@ Joueurs creerJoueur(int i){
     player.faillite = 0;
     player.cartesPrison = 0;
     player.nbHypotheque = 0;
+    player.enPrison = 0;
+    player.placementSur32 = 0;
+    player.nbJoueursVivant = nbJ;
     player.possessionParCase = (int*) calloc(NOMBRE_CASE, sizeof (int));
     for ( int h = 1 ;  h < NOMBRE_CASE ; h = h + 2 ){
         player.possessionParCase[h] = -2;
@@ -52,12 +56,19 @@ Joueurs* initJoueur(int nbJoueurs){
 
     printf("La liste des joueurs s'affichera quand vous aurez rentre vos pseudos: \n\n");
     for ( int i = 0 ; i < nbJoueurs ; i++){
-        tabJoueur[i] = creerJoueur(i);
+        tabJoueur[i] = creerJoueur(i , nbJoueurs);
     }
-    for ( int  i = 0 ; i< nbJoueurs ; i++){
+    /*for ( int  i = 0 ; i< nbJoueurs ; i++){
         printf("Le joueur %d est %s! Sa fortune est de %d, son argent est de %d il se trouve a la case depart,"
                " possede %d maison et %d hotel, avec %d propriete et %d groupe de legendes de sport\n\n", tabJoueur[i].numeroJ , tabJoueur[i].nomJ,
                tabJoueur[i].fortune, tabJoueur[i].argent , tabJoueur[i].nbMaisonsJ, tabJoueur[i].nbHotelsJ, tabJoueur[i].nbProprietes, tabJoueur[i].nbGroupes  );
-    }
+
+    }*/
     return tabJoueur;
 }
+
+
+
+
+
+

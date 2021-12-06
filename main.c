@@ -1,160 +1,250 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-#include "Fonctions.h"
-#include "Structures.h"
-#include "Macro.h"
+#include "propriete.h"
+#include "joueur.h"
+#include "fonctions.h"
+#include "Menu.h"
+#include "time.h"
+#include "stdlib.h"
+#include "joueur.h"
+#include "Cartes.h"
+#include "Deplacement.h"
 
-int main()
-{
-    printf("                                     \n"
-           "                                      \n"
-           "                                MONOPOLY VERSION LEGENDES DU SPORT\n"
-           "-------------------------------------------------------------------------------------------------\n"
-           "| 01        | 02        | 03        | 04        | 05        | 06        | 07        | 08        |\n"
-           "|  case     |           |   payer   |           |  avancez  |           | carte     |           |\n"
-           "|   depart  |  Diego    | match foot|  Zinedine |  case 13  |  Kobe     | communaute|  Mickael  |\n"
-           "|           | Maradona  | -100euros |  Zidane   |           |  Bryant   |           |  Jordan   |\n"
-           "-------------------------------------------------------------------------------------------------\n"
-           "| 09        | 10        | 11        | 12        | 13        | 14        | 15        | 16        |\n"
-           "| case      |           |  cassage  |           |  avancez  |           |  carte    |           |\n"
-           "|   prison  | Sebastien | voiturette|   Jonah   |  case 22  |    Mike   |  chance   |  Mohamed  |\n"
-           "|           |   Chabal  | -100euros |    Lomu   |           |   Tyson   |           |    Ali    |\n"
-           "-------------------------------------------------------------------------------------------------\n"
-           "| 17        | 18        | 19        | 20        | 21        | 22        | 23        | 24        |\n"
-           "| case      |           | chirurgie |           |  avancez  |           | carte     |           |\n"
-           "|   libre   | Florent   | esthetique|   Laure   |  case 29  |   Kevin   | communaute| Penelope  |\n"
-           "|           | Manaudou  | -200euros |  Manaudou |           |   Staut   |           | Leprevost |\n"
-           "-------------------------------------------------------------------------------------------------\n"
-           "| 25        | 26        | 27        | 28        | 29        | 30        | 31        | 32        |\n"
-           "|   aller   |           |  tournoi  |           |  avancez  |           | carte     |           |\n"
-           "| en prison | Benoit    | badminton |   Andre   |  case 05  |  Gareth   | chance    |   Tiger   |\n"
-           "|           |  Paire    | +50euros  |   Agassi  |(+200euros)|   Bale    |           |   Woods   |\n"
-           "-------------------------------------------------------------------------------------------------\n"
-           "\n"
-           "");
-
-
-void menuPrinc()
-{
+int main() {
+    afficherplateau();
     srand(time(NULL));
     int choix = 0;
-    int nbJoueurs = 0;
-    Joueurs** tablNom = NULL;
-    int taille = 0;
-    char* nom;
-    printf("Veuillez choisir parmis l'ensemble des options suivantes:\n1)Lancer une nouvelle partie.\n2)Sauvegarder la partie en cours.\n3)Charger une ancienne partie.\n4)Afficher les noms de l'equipe du projet.\n5)Afficher les regles du jeu.\n6)Quitter ce jeu.\n>");
+    int nbJ = 0;
+    int desUn = 0;
+    int desDeux = 0;
+    int nbCarteChance = 0;
+    int nbCarteCommu = 0;
+    int compteurDouble = 0;
+
+    printf("Veuillez choisir parmi l'ensemble des options suivantes:\n1)Lancer une nouvelle partie.\n2)Sauvegarder la partie en cours.\n3)Charger une ancienne partie.\n4)Afficher les noms de l'equipe du projet.\n5)Afficher les regles du jeu.\n6)Quitter ce jeu.\n>");
     scanf("%d", &choix);
-    switch (choix)
-    {
+    switch (choix) {
         case 1:
-            initCases();
-            nbJoueurs = nombreJoueur();
-            initJoueur(nbJoueurs);
-            //fonction random JM NN
-            //fonction jeu NN
-              //boucle for commenceant aux 1er joueur tiré NN
-                 //lancé vos dés OUI
-                 //fonction placement OUI
-                 //fonction qui récapitule l'ensembles des caractéristiques du joueur NN EVAN
-                 //fonction type NN EC
-                    //execution des différents case JM->cartes chances et commu NN/
-                    //fonction prison OUI
-                 //si double   OUi
-                    //lancé vos dés
-                    //fonction placement
-                    //fonction qui récapitule l'ensembles des caractéristiques du joueur
-                    //fonction type
-                     //execution des différents case JM->cartes chances et commu/
-                     //fonction prison
-            //si double
-                //lancé vos dés
-                //fonction placement
-                //fonction qui récapitule l'ensembles des caractéristiques du joueur
-                //fonction type
-                    //execution des différents case JM->cartes chances et commu/
-                    //fonction prison
-               //go prison
-        // fonction qui annonce le joueur suivant   NN
-        //fonction faillite NN PIERRE
-        //fonction hypotèque NN ROMAIN
+            nbJ = nombreJoueur();
+            Case* tabCase = initCases();
+            Joueurs* tabJoueur = NULL;
+            tabJoueur = initJoueur(nbJ);
+            CartesCommunaute* tabCommu = NULL;
+            CartesChance* tabChance = NULL;
+            tabCommu = initCarteCommunaute();
+            tabChance = initCarteChance();
+            melangerCartesChance(tabChance);
+            melangerCartesCommunaute(tabCommu);
+
+            tabJoueur[0].possessionParCase[1] = 0;
+            tabJoueur[0].possessionParCase[3] = -1;
+            tabJoueur[0].possessionParCase[5] = -1;
+            tabJoueur[0].possessionParCase[7] = 0;
+            tabJoueur[0].possessionParCase[9] = 1;
+            tabJoueur[0].possessionParCase[11] = 2;
+            tabJoueur[0].possessionParCase[13] = 5;
+            tabJoueur[0].possessionParCase[15] = 0;
+            tabJoueur[0].possessionParCase[17] = 0;
+            tabJoueur[1].possessionParCase[19] = 0;
+            tabJoueur[1].possessionParCase[21] = 3;
+            tabJoueur[1].possessionParCase[23] = 0;
+            tabJoueur[1].possessionParCase[25] = 4;
+            tabJoueur[1].possessionParCase[27] = 5;
+            tabJoueur[1].possessionParCase[29] = 1;
+            tabJoueur[1].possessionParCase[31] = 1;
+            tabJoueur[0].nbProprietes = 8;
+            tabJoueur[1].nbProprietes = 8;
+            /*recapPossessionJoueur(tabJoueur[0], tabCase);
+            recapPossessionJoueur(tabJoueur[1], tabCase);*/
+            int jDebut = getRandomInteger1(nbJ);
+            printf("La partie peut commencer, choisi avec le plus grand des hasard ! %s lance les hostilites !\n\n",
+                   tabJoueur[jDebut - 1].nomJ);
+            for (int i = 0; i < i + 1 ; i++) {
+                int choixBis = 0;
+                while (choixBis != 1){
+                printf("\nC'est a %s de faire un choix ! Et plus vite que sa !\n", tabJoueur[((jDebut + i - 1) % nbJ)].nomJ);
+                printf("Choisir parmi les options suivantes : \n 1/ Lancer les des.\n 2/ Voir le recapitulatif de vos possessions."
+                       "\n 3/ Quitter la partie si vous etes un rageux. Attention elle se sera jamais sauvegardee. :)\n >");
+                scanf("%d", &choixBis);
+
+
+
+                switch (choixBis) {
+                    case 1:
+
+
+                        if (tabJoueur[i].nbJoueursVivant == 1) {
+                            for (int k = 0; k < nbJ; k++) {
+                                if (tabJoueur[k].faillite == 0) {
+                                    printf("%s A GAGNE BRAVO !!!", tabJoueur[k].nomJ);
+                                    return 0;
+                                }
+                            }
+                        }
+
+
+                        tabJoueur[(jDebut + i - 1) % nbJ].placement = jeuDes(&desUn, &desDeux,
+                                                                             &tabJoueur[(jDebut + i - 1) % nbJ]);
+                        tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 = tabJoueur[(jDebut + i - 1) % nbJ].placement;
+                        printf("Vous avez avance jusqu'a la %s.\n",
+                               tabCase[(tabJoueur[(jDebut + i - 1) % nbJ].placement) - 1].nomPro);
+                        if (tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 > 32) {
+                            tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 = 0;
+                            printf("Vous etes passez par la case depart , vous recevez 200 euros");
+                            tabJoueur[(jDebut + i - 1) % nbJ].argent += 200;
+                            tabJoueur[(jDebut + i - 1) % nbJ].fortune += 200;
+
+                        }
+                        typeCartes(&tabCase[tabJoueur[(jDebut + i - 1) % nbJ].placement - 1],
+                                   &tabJoueur[(jDebut + i - 1) % nbJ],
+                                   &tabJoueur[tabCase[tabJoueur[(jDebut + i - 1) % nbJ].placement].possibilite],
+                                   tabChance, tabCommu, nbJ, tabJoueur);
+                        int doooble = dooble(&desUn, &desDeux, &tabJoueur[(jDebut + i - 1) % nbJ] );
+                        if (doooble == 1){
+
+                            if (tabJoueur[i].nbJoueursVivant == 1) {
+                                for (int k = 0; k < nbJ; k++) {
+                                    if (tabJoueur[k].faillite == 0) {
+                                        printf("%s A GAGNE BRAVO !!!", tabJoueur[k].nomJ);
+                                        return 0;
+                                    }
+                                }
+                            }
+
+
+                            tabJoueur[(jDebut + i - 1) % nbJ].placement = jeuDes(&desUn, &desDeux,
+                                                                                 &tabJoueur[(jDebut + i - 1) % nbJ]);
+                            tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 = tabJoueur[(jDebut + i - 1) % nbJ].placement;
+                            printf("Vous avez avance jusqu'a la %s.\n",
+                                   tabCase[(tabJoueur[(jDebut + i - 1) % nbJ].placement) - 1].nomPro);
+                            if (tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 > 32) {
+                                tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 = 0;
+                                printf("Vous etes passez par la case depart , vous recevez 200 euros");
+                                tabJoueur[(jDebut + i - 1) % nbJ].argent += 200;
+                                tabJoueur[(jDebut + i - 1) % nbJ].fortune += 200;
+
+                            }
+                            typeCartes(&tabCase[tabJoueur[(jDebut + i - 1) % nbJ].placement - 1],
+                                       &tabJoueur[(jDebut + i - 1) % nbJ],
+                                       &tabJoueur[tabCase[tabJoueur[(jDebut + i - 1) % nbJ].placement].possibilite],
+                                       tabChance, tabCommu, nbJ, tabJoueur);
+                             doooble = dooble(&desUn, &desDeux, &tabJoueur[(jDebut + i - 1) % nbJ] );
+
+                        }
+                        if (doooble == 1){
+
+                            if (tabJoueur[i].nbJoueursVivant == 1) {
+                                for (int k = 0; k < nbJ; k++) {
+                                    if (tabJoueur[k].faillite == 0) {
+                                        printf("%s A GAGNE BRAVO !!!", tabJoueur[k].nomJ);
+                                        return 0;
+                                    }
+                                }
+                            }
+
+
+                            tabJoueur[(jDebut + i - 1) % nbJ].placement = jeuDes(&desUn, &desDeux,
+                                                                                 &tabJoueur[(jDebut + i - 1) % nbJ]);
+                            tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 = tabJoueur[(jDebut + i - 1) % nbJ].placement;
+                            printf("Vous avez avance jusqu'a la %s.\n",
+                                   tabCase[(tabJoueur[(jDebut + i - 1) % nbJ].placement) - 1].nomPro);
+                            if (tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 > 32) {
+                                tabJoueur[(jDebut + i - 1) % nbJ].placementSur32 = 0;
+                                printf("Vous etes passez par la case depart , vous recevez 200 euros");
+                                tabJoueur[(jDebut + i - 1) % nbJ].argent += 200;
+                                tabJoueur[(jDebut + i - 1) % nbJ].fortune += 200;
+
+                            }
+                            typeCartes(&tabCase[tabJoueur[(jDebut + i - 1) % nbJ].placement - 1],
+                                       &tabJoueur[(jDebut + i - 1) % nbJ],
+                                       &tabJoueur[tabCase[tabJoueur[(jDebut + i - 1) % nbJ].placement].possibilite],
+                                       tabChance, tabCommu, nbJ, tabJoueur);
+                            doooble = dooble(&desUn, &desDeux, &tabJoueur[(jDebut + i - 1) % nbJ] );
+
+
+                        }
+                        if (doooble == 1){
+                            printf("\n ET Bah non !! EN fait s'il vous reste 0 double a faire, vous aller en prison jeune chenapans...\n Les regles sont pourtant afficher en debut de jeu !\n");
+                        }
+
+                        break;
+                    case 2:
+                        recapPossessionJoueur(tabJoueur[((jDebut + i - 1) % nbJ)], tabCase);
+                        break;
+                    case 3:
+                        printf("Fin de partie , vous ne la retrouverez JAMAIS , c'est CIAO");
+                        return 0;
+                        break;
+
+                    default:
+                        printf("IL FAUT CHOISIR UN NUMERO ENTRE 1 ET 3 ESPECE DE TOCARD !\n");
+                        break;
+
+
+                }
+                }
+            }
+
             break;
         case 2:
-            //Sauvegarder partie en cours
+            printf("Gros c'est mort j'ai pas le temps");
             break;
         case 3:
-            //charger une ancienne partie
+            printf("LOL je ne suis pas un chargeur !");
             break;
         case 4:
-            printf("Les devellopeurs de ce jeu sont:\n>Evan RHEILAC-AUPRETRE\n>Pierre ALLOUCHERIE\n>Jean-Marc COLLEGIA\n>Romain BOUCHER");
+            printf("Les developpeurs de ce jeu sont:\n>Evan RHEILAC-AUPRETRE\n>Pierre ALLOUCHERIE\n>Jean-Marc COLLEGIA\n>Romain BOUCHER");
             break;
         case 5:
-            //règles du jeu
+            printf(" RESUME EXPLICATIF :\n"
+                   "\n"
+                   "Ce jeu consiste a ACHETER, a LOUER ou a VENDRE diverses proprietes de facon si profitable que l’on puisse devenir le plus riche des joueurs et eventuellement, le GAGNANT\n"
+                   "La premiere case est le point de départ, et l’on fait avancer les jetons sur le plateau de jeu d’apres le chiffre indiqué en lancant les des.\n"
+                   "Si le jeton d’un joueur se place sur une case qui n’appartient encore a personne, le joueur pourra l’acheter de la BANQUE, sinon, cette case sera vendue au plus offrant et dernier enchérisseur.\n"
+                   "Devenir proprietaire a pour OBJECTIF la perception de loyers des adversaires loges sur la case qui represente la propriete. Ces loyers sont fortement augmentes par la construction de maisons et d’hotels;\n"
+                   "il sera donc judicieux d’en eriger sur ses terrains.\n"
+                   "On pourra pour se procurer des fonds, hypothequer ces terrains en faveur de la banque, les cases « Caisse Commune » et « Chance » obligent le joueur a tirer une carte, dont les indications devront être observees.\n"
+                   "les joueurs vont quelquefois en prison !\n"
+                   "Somme toute, c’est un jeu amusant, plein de surprises, et ou l’on peut deployer son habilete.");
             break;
         case 6:
-            //quitter le jeu
+            return 0;
             break;
+        default:
+            break;
+
     }
-}
-    /*int i = 0;
-    printf("Que voulez vous faire : \n 1) Jouez au Monopoly \n 2) Sauvegarder une partie \n 3) Charger une partie \n 4) Les regles du jeu \n 5) Les createurs de ce jeu \n");
-    switch(i >= 5)
-    {
 
-        case 1:
+    /* Case *tabCase = initCases();
 
-            break;
+     int nb = nombreJoueur();
+     Joueurs *tabJoueur = NULL;
+     tabJoueur = initJoueur(nb);
+     tabJoueur[0].possessionParCase[1] = 0;
+     tabJoueur[0].possessionParCase[3] = -1;
+     tabJoueur[0].possessionParCase[5] = -1;
+     tabJoueur[0].possessionParCase[7] = 0;
+     tabJoueur[0].possessionParCase[9] = 1;
+     tabJoueur[0].possessionParCase[11] = 2;
+     tabJoueur[0].possessionParCase[13] = 5;
+     tabJoueur[0].possessionParCase[15] = 0;
+     tabJoueur[0].possessionParCase[17] = 0;
+     tabJoueur[1].possessionParCase[19] = 0;
+     tabJoueur[1].possessionParCase[21] = 3;
+     tabJoueur[1].possessionParCase[23] = 0;
+     tabJoueur[1].possessionParCase[25] = 4;
+     tabJoueur[1].possessionParCase[27] = 5;
+     tabJoueur[1].possessionParCase[29] = 1;
+     tabJoueur[1].possessionParCase[31] = 1;
+     RecapPossessionJoueur(tabJoueur[0], tabCase);
+     RecapPossessionJoueur(tabJoueur[1], tabCase);
+     for (int i = 0; i < nb; i++) {
+         printf(" affichage relation par case de %s : ", tabJoueur[i].nomJ);
+         for (int j = 0; j < NOMBRE_CASE; j++) {
+             printf("%d \t ", tabJoueur[i].possessionParCase[j]);
+             printf("/");
+         }
+     }
 
-        case 2:
-
-            break;
-
-        case 3:
-
-            break;
-
-        case 4:
-
-            break;
-
-        case 5:
-
-            break;
-    initCases();
-    int nbJoueurs;
-    nbJoueurs = nombreJoueur();
-    for(int i = 0; i < nbJoueurs; i++)
-    {
-        initJoueur(i);
-    }*/
-    //initJoueur(nbJoueurs);
-
-    //fonction random JM NN
-    //fonction jeu NN
-    //boucle for commenceant aux 1er joueur tiré NN
-    //lancé vos dés OUI
-    //fonction placement OUI
-    //fonction qui récapitule l'ensembles des caractéristiques du joueur NN EVAN
-    //fonction type NN EC
-    //execution des différents case JM->cartes chances et commu NN/ ROM ou Evan->achat prop NN
-    //fonction prison OUI
-    //si double   OUi
-    //lancé vos dés
-    //fonction placement
-    //fonction qui récapitule l'ensembles des caractéristiques du joueur
-    //fonction type
-    //execution des différents case JM->cartes chances et commu/ ROM ou Evan->achat prop
-    //fonction prison
-    //si double
-    //lancé vos dés
-    //fonction placement
-    //fonction qui récapitule l'ensembles des caractéristiques du joueur
-    //fonction type
-    //execution des différents case JM->cartes chances et commu/ ROM ou Evan->achat prop
-    //fonction prison
-    //go prison
-    // fonction qui annonce le joueur suivant   NN
-    //fonction faillite NN PIERRE
-    //fonction hypotèque NN ROMAIN
+ */
+    return 0;
 }

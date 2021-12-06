@@ -10,7 +10,7 @@ typedef struct{
     int nbMaisonsJ; // max 4 par propriété
     int nbHotelsJ; // max 1 par propriété
     int nbProprietes;
-
+    char possessionParGroupe[8]; // 0 si aucune propriete du gp , 1 si une possedees et 2 si 2 possedees
     int* possessionParCase; // réprésente la relation entre un joueur et une case du jeu, vaut le nombre de maison à l'indice de la case , -2 s'il ne possède pas, -1 s'il l'a hypothéquée, -3 si ce n'est une pas une propriété
     int nbGroupes;
     int fortune;
@@ -19,6 +19,9 @@ typedef struct{
     int nbHypotheque;
     int numeroJ;
     int nbDouble;
+    int enPrison;
+    int placementSur32;
+    int nbJoueursVivant;
 
 }Joueurs;
 
@@ -29,13 +32,31 @@ typedef struct
     int donne; //ce que tu reçois par la case
     int prix;
     int loyer;
+    int hypotheque;
     int valeurHypotheque;
     int numero;
     int nbMaison;
     int nbHotel;
     int prixMaison;
     int newCase;
+    int numeroGroupes;
     char nomGroupe[TAILLE_NOM_MAX];
-    int possibilite; //-1 si pas une propriete, 0 disponible , le chiffre de dizaine indique le joueur et l'unité le nombre de maisons : 10 possede par j1, 11 avec 1 maisons etc...
+    int possibilite; //-1 si pas une propriete, 0 disponible , x si appartient au joueur x ...
 }Case;
+
+
+typedef struct
+{
+    char nomCarte[TAILLE_NOM_MAX];
+    int numero;
+    int prixAPayer;
+    int prixARecevoir;
+} CartesChance;
+
+typedef struct {
+    char nomCarte[TAILLE_NOM_MAX];
+    int numero;
+    int prixAPayer;
+    int prixARecevoir;
+} CartesCommunaute;
 #endif //MONOP_EVAN_STRUCTURE_H
