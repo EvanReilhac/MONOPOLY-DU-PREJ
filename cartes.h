@@ -2,6 +2,7 @@
 // Created by User on 18-11-21.
 //
 #define MAX 100
+#define NOMBRE_CASE 32
 #define TAILLE_NOM_MAX 100
 #ifndef MONOPOLYJM_CARTES_H
 #define MONOPOLYJM_CARTES_H
@@ -17,16 +18,20 @@ typedef struct {
 } CartesCommunaute;
 
 typedef struct{
-    char nom[MAX];
+    char nomPro[TAILLE_NOM_MAX];
     int type; // 0 = legende; 1 = carte chance; 2 = carte communaute; 3 = case depart; 4 = prison; 5 = perte/gain d'argent sur case; 6 = avancement; 7 = case libre
     int donne; //ce que tu reçois par la case
     int prix;
     int loyer;
-    int dispo;
+    int valeurHypotheque;
     int hypotheque;
     int numero;
     int nbMaison;
+    int nbHotel;
+    int prixMaison;
     int newCase;
+    char nomGroupe[TAILLE_NOM_MAX];
+    int possibilite; //-1 si pas une propriete, 0 disponible , le chiffre de dizaine indique le joueur et l'unité le nombre de maisons : 10 possede par j1, 11 avec 1 maisons etc...
 }Case;
 
 typedef struct{
@@ -44,10 +49,12 @@ typedef struct{
     int faillite;
     int nbHypotheque;
     int nbDouble;
+    int enPrison;
 }Joueurs;
 
 
 int nombreJoueur();
+void fonctionHypoteque(Case* prop, Joueurs* pAcheteur, int prix);
 int getRandomInteger(int nbJoueurs);
 void tirageAuSortJoueurs(Joueurs* tabJoueurs, int nbJoueurs);
 void goPrison(Joueurs* joueur);
@@ -66,6 +73,6 @@ int montantLoyerDeuxMaisons(int numeroGroupe, int emplacement, Case* p);
 int montantLoyerTroisMaisons(int numeroGroupe, int emplacement, Case* p);
 int montantLoyerQuatreMaisons(int numeroGroupe, int emplacement, Case* p);
 int montantLoyerUnHotel(int numeroGroupe, int emplacement, Case* p);
-void affecterLoyer(int nbMaisons, int nbHotel);
+void affecterLoyer(int nbMaisons, int nbHotel, int emplacement, Case *p);
 
 #endif //MONOPOLYJM_CARTES_H
