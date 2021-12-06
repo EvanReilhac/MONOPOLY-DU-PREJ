@@ -15,7 +15,7 @@ void afficher(Joueurs* c);
 void achatRue(Case* p, Joueurs* pAcheteur, Joueurs* pProprio);
 void caseDepart(Joueurs* p);
 void changement(Joueurs* p);
-void perteOuGainArgent(Joueurs* joueur);
+void perteOuGainArgent(Joueurs* joueur, Case* tabCase);
 void allezPrison(Joueurs* joueur);
 void attributionCarteChance(int numero, Joueurs* j);
 void afficherCarteChance(CartesChance* carte);
@@ -26,5 +26,7 @@ Case* initCases();
 void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio);
 void achatMaison(Case* prop, Joueurs* pAcheteur);
 void typeCartes(Case* prop, Joueurs* player, Joueurs* pProprio, CartesChance* paquetChance);
-void fonctionHypoteque(Joueurs* pAcheteur, int prix);
+void fonctionHypoteque(Case* prop, Joueurs* pAcheteur, int prix);
+void goPrison(Joueurs* joueur);
+
 #endif //MONOPOLY_FONCTION_H
