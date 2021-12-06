@@ -1,11 +1,10 @@
-//evan version
-#include "joueur.h"
-#include "structure.h"
-#include "string.h"
-#include "stdio.h"
-#include "stdlib.h"
-
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#include "Fonctions.h"
+#include "Structures.h"
+#include "Macro.h"
 
 int nombreJoueur() {
     int nbJoueurs = 0;
@@ -59,13 +58,6 @@ Joueurs* initJoueur(int nbJoueurs){
         printf("Le joueur %d est %s! Sa fortune est de %d, son argent est de %d il se trouve a la case depart,"
                " possede %d maison et %d hotel, avec %d propriete et %d groupe de legendes de sport\n\n", tabJoueur[i].numeroJ , tabJoueur[i].nomJ,
                tabJoueur[i].fortune, tabJoueur[i].argent , tabJoueur[i].nbMaisonsJ, tabJoueur[i].nbHotelsJ, tabJoueur[i].nbProprietes, tabJoueur[i].nbGroupes  );
-
     }
     return tabJoueur;
 }
-
-
-
-
-
-
