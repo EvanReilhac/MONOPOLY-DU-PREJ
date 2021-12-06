@@ -30,7 +30,7 @@ int main()
            "| 25        | 26        | 27        | 28        | 29        | 30        | 31        | 32        |\n"
            "|   aller   |           |  tournoi  |           |  avancez  |           | carte     |           |\n"
            "| en prison | Benoit    | badminton |   Andre   |  case 05  |  Gareth   | chance    |   Tiger   |\n"
-           "|           |  Paire    | par terre |   Agassi  |(+200euros)|   Bale    |           |   Woods   |\n"
+           "|           |  Paire    | +50euros  |   Agassi  |(+200euros)|   Bale    |           |   Woods   |\n"
            "-------------------------------------------------------------------------------------------------\n"
            "\n"
            "");
