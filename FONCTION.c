@@ -223,18 +223,21 @@ void perteOuGainArgent(Joueurs* joueur)
         printf("Vous payez une place de foot 100euros, vous allez au match, sauf que le match est annule car un joueur se prend une bouteille cristaline dans la tete et meurt soudainement.. Vous perdez 100euros. \n");
         joueur->argent -= 100;
         joueur->fortune -= 100;
+        fonctionHypoteque(joueur, 100);
     }
     else if (joueur->placement == 11)
     {
         printf("Vous cassez une voiture de golf en faisant une course contre votre grand pere qui lui est en deambulateur, vous gagnez la course mais perdez 100euros pour reparer la voiture de golf. \n");
         joueur->argent -= 100;
         joueur->fortune -= 100;
+        fonctionHypoteque(joueur, 100);
     }
     else if (joueur->argent == 19)
     {
         printf("Vous apercevez Mohamed Ali dans un reve qui vous dit de vous battre avec le prochain inconnu que vous croisez. Vous rencotrez Conor McGreggor et donc vous le chauffez pour vous battre avec. Sans surprise vous perdez et donc devez payer 200euros de chirurgie estethique. \n");
         joueur->argent -= 100;
         joueur->fortune -=100;
+        fonctionHypoteque(joueur, 100);
     }
     else if(joueur->placement == 27)
     {
@@ -578,6 +581,7 @@ void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio){
             printf("Aie aie aie, sa sent le sapin. Voulez vous hypothequer une de vos proprietes? Si oui tapez 1 sinon tapez 0 et vous faites faillite\n");
             scanf("%d", &choix);
             if (choix == 1){
+                fonctionHypoteque(pAcheteur, 100);
 
             }
 
@@ -654,9 +658,8 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
                 printf("Mais quel joueur!!! vous faites l'acquisition d'un hotel.\n");
                 pAcheteur->nbHotelsJ += 1;
                 pAcheteur->possessionParCase[prop->numero] = pAcheteur->possessionParCase[prop->numero] + 1;
-                if (pAcheteur->possessionParCase[prop->numero] == 5){
-
-                }
+                pAcheteur->argent += - prop->prixMaison;
+                pAcheteur->fortune += - prop->prixMaison;
         }
         else {
                 printf("Souhaitez vouz acheter une maison a %d pour embellir votre rue? Si oui tapez 1 sinon tapez 0:\n>",
@@ -668,6 +671,8 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
                 } else if (choix == 1) {
                     printf(" Vous faites l'acquisition d'une nouvelle maison.\n");
                     pAcheteur->possessionParCase[prop->numero] = pAcheteur->possessionParCase[prop->numero] + 1;
+                    pAcheteur->argent += - prop->prixMaison;
+                    pAcheteur->fortune += - prop->prixMaison;
 
                 }
             }
@@ -678,12 +683,13 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
 
 }
 
- void fonctionHypoteque(Case* prop, Joueurs* pAcheteur) {
+ void fonctionHypoteque(Joueurs* pAcheteur, int prix) {
      int choix = 1;
      int choixBis = 1;
      int choixBisBis = 0;
-     while (pAcheteur->argent < prop->loyer) {
-         printf("Vous avez différent choix qui s'offre a vous:1)Vendre une maison.\n 2)Vendre un hotel.\n3)Hypothequer une propriete.\n>");
+     Case* prop;
+     while (pAcheteur->argent < prix) {
+         printf("Vous avez différent choix qui s'offre a vous:\n1)Vendre une maison.\n 2)Vendre un hotel.\n3)Hypothequer une propriete.\n>");
          scanf("%d", &choix);
          switch (choix) {
              case 1:
@@ -701,6 +707,9 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
                              pAcheteur->possessionParCase[prop->numero] += -1;
 
                          }
+                     }
+                     else{
+                         printf("Vous n'avez pas de maison...\n");
                      }
                  }
                  break;
@@ -734,11 +743,15 @@ void achatMaison(Case* prop, Joueurs* pAcheteur){
                              pAcheteur->argent += prop->prix / 2;
                              pAcheteur->fortune += prop->prix / 2;
                              pAcheteur->possessionParCase[prop->numero] += -1;
+                             prop->hypotheque = 1;
 
                          }
                      }
                  }
+                 break;
 
+             default:
+                 printf("Votre QI est deficient...Veuillez taper une valeur entre 1 et 3");
 
          }
 

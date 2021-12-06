@@ -26,5 +26,5 @@ Case* initCases();
 void prixLoyer(Case* prop, Joueurs* pAcheteur, Joueurs* pProprio);
 void achatMaison(Case* prop, Joueurs* pAcheteur);
 void typeCartes(Case* prop, Joueurs* player, Joueurs* pProprio, CartesChance* paquetChance);
-void fonctionHypoteque(Case* prop, Joueurs* pAcheteur);
+void fonctionHypoteque(Joueurs* pAcheteur, int prix);
 #endif //MONOPOLY_FONCTION_H
